@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Form = ({onSubmit, inputValues}) => {
 
     const [values, setValues] = useState({name:"",email:"",phone:""})
+    const error = 'Please fill in all fields!!';
     const navigate = useNavigate()
     
     useEffect(() => {
@@ -24,7 +25,8 @@ const Form = ({onSubmit, inputValues}) => {
     }
 
     return (
-        <form onSubmit={submit} className="">
+        <form onSubmit={submit} className="mt-4">
+            <div className="alert " >{values.name && values.email && values.phone ? "" : error}</div>
             <input placeholder={inputValues ? "Name":"Full name"} name="name" type="text" value={values?.name} onChange={handleChange} required/>
             <input placeholder="Email" name="email" type="email" value={values?.email} onChange={handleChange} required/>
             <input placeholder="Phone" name="phone" type="number" value={values?.phone} onChange={handleChange} required/>
