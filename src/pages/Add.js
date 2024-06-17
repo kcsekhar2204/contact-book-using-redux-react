@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { text } from "../utils";
+import { checkDuplicates, text } from "../utils";
 import Form from "../components/Form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 const Add = () => {
@@ -10,11 +11,18 @@ const Add = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const id = useSelector(state => state.id)
+  const contacts = useSelector(state => state.contacts)
 
   const submit = (e) => {
     const payload = {id:id, name:e.name, email: e.email, phone:e.phone}
-    
-    dispatch({type:"ADD_CONTACT", payload: payload, navigate:navigate})
+    const duplicateMessage = checkDuplicates(contacts, payload)
+    if(duplicateMessage) {
+      toast.error(duplicateMessage)
+    } else {
+      toast.success(text.addSuccess)
+      dispatch({type:"ADD_CONTACT", payload: payload})
+      navigate('/')
+    }
   }
 
   return (

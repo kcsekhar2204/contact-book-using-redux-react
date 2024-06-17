@@ -1,6 +1,3 @@
-import { toast } from "react-toastify";
-import { checkDuplicates, text } from "./utils";
-
 // reducers/contactReducer.js
 const initialState = {
     contacts: {
@@ -10,16 +7,8 @@ const initialState = {
 };
 
 const contactReducer = (state = initialState, action) => {
-    var duplicateMessage
     switch (action.type) {
         case 'ADD_CONTACT':
-            duplicateMessage = checkDuplicates(state.contacts, action.payload)
-            if(duplicateMessage) {
-                toast.error(duplicateMessage)
-                return state
-            } 
-            toast.success(text.addSuccess)
-            action.navigate('/')
             return {
                 ...state,
                 contacts: {...state.contacts, [action.payload.id]: action.payload},
@@ -32,13 +21,6 @@ const contactReducer = (state = initialState, action) => {
                 contacts: updatedContacts,
             };
         case 'UPDATE_CONTACT':
-            duplicateMessage = checkDuplicates(state.contacts, action.payload)
-            if(duplicateMessage) {
-                toast.error(duplicateMessage)
-                return state
-            } 
-            toast.success(text.updateSuccess)
-            action.navigate('/')
             return {
                 ...state,
                 contacts: {...state.contacts, [action.payload.id]: action.payload},

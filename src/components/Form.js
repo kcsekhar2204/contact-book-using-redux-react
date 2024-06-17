@@ -25,11 +25,11 @@ const Form = ({onSubmit, inputValues}) => {
 
     return (
         <form onSubmit={submit} className="">
-            <input placeholder="Full Name" name="name" type="text" value={values?.name} onChange={handleChange} required/>
+            <input placeholder={inputValues ? "Name":"Full name"} name="name" type="text" value={values?.name} onChange={handleChange} required/>
             <input placeholder="Email" name="email" type="email" value={values?.email} onChange={handleChange} required/>
             <input placeholder="Phone" name="phone" type="number" value={values?.phone} onChange={handleChange} required/>
-            <button type="submit">{inputValues ? text.update : text.addStudent}</button>
-            {inputValues && <button onClick={() => navigate('/')}>{text.cancel}</button>}
+            <input type="submit" value={inputValues ? text.update : text.addStudent} />
+            {inputValues && <button className="text-capitalize" onClick={() => navigate('/')}>{text.cancel}</button>}
         </form>
     );
 };

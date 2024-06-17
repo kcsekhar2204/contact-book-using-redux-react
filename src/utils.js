@@ -11,7 +11,7 @@ export const text = {
     addStudent: "Add Student",
     goBack: "Go Back",
     update: "Update Contact",
-    cancel: "Cancel",
+    cancel: "cancel",
     addSuccess: "Contact added successfully!!",
     updateSuccess: "Contact updated successfully!!",
     duplicateEmail: "This email already exists!!",
